@@ -6,6 +6,9 @@
 // Assume that both parameters will be strings.
 
 
+///////////////////////////////////
+//          My solution
+///////////////////////////////////
 function anagram(str1, str2) {
 
   //Checking that string lengths match
@@ -40,3 +43,40 @@ function anagram(str1, str2) {
 }
 
 anagram("iceman", "cinema");
+
+// Three seperate loops will still have a big O time complexity of O(3n) which is still O(n) as opposed to nesting loops
+// which will give you O(n^2).
+
+
+///////////////////////////////////
+//     Instructors solution
+///////////////////////////////////
+function validAnagram(first, second) {
+  if (first.length !== second.length) {
+    return false;
+  }
+
+  const lookup = {};
+
+  for (let i = 0; i < first.length; i++) {
+    let letter = first[i];
+    // if letter exists, increment, otherwise set to 1
+    lookup[letter] ? lookup[letter] += 1 : lookup[letter] = 1;
+  }
+  console.log(lookup)
+
+  for (let i = 0; i < second.length; i++) {
+    let letter = second[i];
+    // can't find letter or letter is zero then it's not an anagram
+    if (!lookup[letter]) {
+      return false;
+    } else {
+      lookup[letter] -= 1;
+    }
+  }
+
+  return true;
+}
+
+// {a: 0, n: 0, g: 0, r: 0, m: 0,s:1}
+validAnagram('anagrams', 'nagaramm')
