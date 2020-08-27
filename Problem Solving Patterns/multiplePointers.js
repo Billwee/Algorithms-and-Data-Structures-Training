@@ -4,7 +4,7 @@
 // NOTE: This only works on sorted arrays
 
 /////////////////////////////////////
-//         My solution
+//         First Challenge
 /////////////////////////////////////
 
 function countUniqueValues(arr) {
@@ -34,7 +34,7 @@ function countUniqueValues(arr) {
 
 }
 
-countUniqueValues([-3, -3, -1, 0, 1, 2, 2, 3, 4, 4, 4, 4]);
+// countUniqueValues([-3, -3, -1, 0, 1, 2, 2, 3, 4, 4, 4, 4]);
 
 
 
@@ -53,4 +53,91 @@ function countUniqueValues2(arr) {
   }
   return i + 1;
 }
-countUniqueValues2([1, 2, 2, 5, 7, 7, 99])
+// countUniqueValues2([1, 2, 2, 5, 7, 7, 99])
+
+
+/////////////////////////////////////
+//         Second Challenge
+/////////////////////////////////////
+
+// Write a function called averagePair. Given a sorted aray of integers and a target average, determine if there 
+// is a pair of values in the array where the average of the pair equals the target average. There may be more 
+// than one par that matches teh average target.
+
+function averagePair(arr, target) {
+  var pointer1 = 0;
+  var pointer2 = 0;
+
+  if (arr.length < 2) {
+    console.log("False")
+    return false;
+  }
+
+  while (pointer1 <= arr.length) {
+    pointer2++;
+    // console.log(pointer1, pointer2, arr.length);
+    // console.log(arr[pointer1] + " / " + arr[pointer2]);
+    if ((pointer2) < arr.length) {
+      if ((arr[pointer1] + arr[pointer2]) / 2 === target) {
+        console.log("True")
+        return true;
+      } else {
+        continue;
+      }
+    }
+    pointer2 = pointer1 + 1;
+    pointer1++;
+  }
+  console.log("False")
+  return false;
+}
+
+// averagePair([1, 2, 3], 2.5);
+// averagePair([1, 3, 3, 5, 6, 7, 10, 12, 19], 8);
+// averagePair([-1, 0, 3, 4, 5, 6], 4.1);
+// averagePair([], 4);
+
+/////////////////////////////////
+//    Instructor solution
+/////////////////////////////////
+
+
+
+
+
+/////////////////////////////////////
+//         Third Challenge
+/////////////////////////////////////
+
+// Write a function called isSubsequence which thakes in two strings and checks whether the characters in the first string form a subsequence of the characters in the second string. In other words, the function should check whether the characters in the first strgin appear somewhere in the second string, without their order changing.
+
+function isSubsequence(str1, str2) {
+  let pointer1 = 0;
+  let pointer2 = 0;
+
+  while (pointer2 < str2.length) {
+    if (str1[pointer1] === str2[pointer2]) {
+      pointer1++;
+      pointer2++;
+    } else {
+      pointer2++;
+    }
+    if (pointer1 === str1.length) {
+      console.log("True")
+      return true;
+    }
+  }
+  console.log("False")
+  return false;
+}
+
+// isSubsequence("hello", "hello world");
+// isSubsequence("sing", "sting");
+// isSubsequence("abc", "abracadabra");
+// isSubsequence("abc", "acb");
+
+
+
+/////////////////////////////////
+//    Instructor solution
+/////////////////////////////////
