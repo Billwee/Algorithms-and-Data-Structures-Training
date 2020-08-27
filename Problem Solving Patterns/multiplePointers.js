@@ -56,6 +56,8 @@ function countUniqueValues2(arr) {
 // countUniqueValues2([1, 2, 2, 5, 7, 7, 99])
 
 
+
+
 /////////////////////////////////////
 //         Second Challenge
 /////////////////////////////////////
@@ -101,8 +103,17 @@ function averagePair(arr, target) {
 //    Instructor solution
 /////////////////////////////////
 
-
-
+function averagePair2(arr, num) {
+  let start = 0
+  let end = arr.length - 1;
+  while (start < end) {
+    let avg = (arr[start] + arr[end]) / 2
+    if (avg === num) return true;
+    else if (avg < num) start++
+    else end--
+  }
+  return false;
+}
 
 
 /////////////////////////////////////
