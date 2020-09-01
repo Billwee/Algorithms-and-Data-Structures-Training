@@ -6,16 +6,15 @@
 // a new string in reverse.
 
 function reverse(str) {
-  let arr = str;
-  let newArr;
+  let newStr;
 
-  newArr = arr[arr.length - 1];
+  newStr = str[str.length - 1];
 
-  if (arr.length === 1) return newArr;
+  if (str.length === 1) return newStr;
 
-  newArr = newArr.concat(reverse(arr.slice(0, arr.length - 1)));
+  newStr = newStr.concat(reverse(str.slice(0, str.length - 1)));
 
-  return newArr;
+  return newStr;
 }
 
 console.log(reverse("awesome"));
