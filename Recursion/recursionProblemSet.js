@@ -20,6 +20,15 @@ function power(base, exponent) {
 /////   Instructor Solution 1
 //////////////////////////////////
 
+function power(base, exponent) {
+  if (exponent === 0) return 1;
+  return base * power(base, exponent - 1);
+}
+//
+//
+//
+//
+
 //////////////////////////////////
 /////   Problem 2
 //////////////////////////////////
@@ -42,6 +51,16 @@ function factorial(num) {
 /////   Instructor Solution 2
 //////////////////////////////////
 
+function factorial(x) {
+  if (x < 0) return 0;
+  if (x <= 1) return 1;
+  return x * factorial(x - 1);
+}
+//
+//
+//
+//
+
 //////////////////////////////////
 /////   Problem 3
 //////////////////////////////////
@@ -62,6 +81,17 @@ function productOfArray(arr) {
 /////   Instructor Solution 3
 //////////////////////////////////
 
+function productOfArray2(arr) {
+  if (arr.length === 0) {
+    return 1;
+  }
+  return arr[0] * productOfArray(arr.slice(1));
+}
+//
+//
+//
+//
+
 //////////////////////////////////
 /////   Problem 4
 //////////////////////////////////
@@ -81,6 +111,16 @@ function recursiveRange(num) {
 //////////////////////////////////
 /////   Instructor Solution 4
 //////////////////////////////////
+
+function recursiveRange2(x) {
+  if (x === 0) return 0;
+  return x + recursiveRange(x - 1);
+}
+
+//
+//
+//
+//
 
 //////////////////////////////////
 /////   Problem 5
