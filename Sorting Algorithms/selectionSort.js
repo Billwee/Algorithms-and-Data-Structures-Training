@@ -4,7 +4,9 @@
 // SelectionSort should only really be used over bubbleSort if you need to save memory
 // since SS only does one swap, as BS does a swap at every comparison
 
-// SelectionSort has a time complexity of O(n^2)
+// SelectionSort has a time complexity of O(n^2) always
+
+// Space complexity of O(1)
 
 // Make a variable to store the minimum value. Iterate through the array and compare
 // this number to the each index. If the number your comparing is smaller than the set

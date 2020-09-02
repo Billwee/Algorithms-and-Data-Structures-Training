@@ -2,9 +2,11 @@
 
 // BubbleSort is not a very popular or fast sorting algorithm
 
-// BubbleSort has a time complexity of O(n^2)
+// BubbleSort has a time complexity of O(n^2). In best case scenerios it has O(n).
 
-// BS will use two pointers srating at the first and second indexes of the array and compare them.
+// Space complexity of O(1)
+
+// BS will use two pointers starting at the first and second indexes of the array and compare them.
 // If the first index value is greater than the second, their values are swapped. If not then
 // nothing happens. After the comparison, the two indexes move up and element and compare again.
 // This action will move the largest value to the end of the array. Then the comparison process is
@@ -55,11 +57,10 @@ const swap = (arr, idx1, idx2) => {
   [arr[idx1], arr[idx2]] = [arr[idx2], arr[idx1]];
 };
 
-
 // These BubbleSorts, while working, aren't exactly as efficent as they can be.
-// for example.. if the last half of the list is already sorted. It will still 
+// for example.. if the last half of the list is already sorted. It will still
 // iterate through them while only removing one at the end at a time.
-// If we add a boolean that changes when no swaps are done we can effectivly 
+// If we add a boolean that changes when no swaps are done we can effectivly
 // end the sorting a lot earlier.
 
 function bubbleSort3(arr) {
@@ -80,7 +81,3 @@ function bubbleSort3(arr) {
 }
 
 console.log(bubbleSort3([111, 1214, 39, 146, 323, 674]));
-
-
-
-
