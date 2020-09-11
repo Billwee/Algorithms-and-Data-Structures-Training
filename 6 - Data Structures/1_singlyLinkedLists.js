@@ -5,6 +5,12 @@
 // start from the front (head) of a linked list to access values within it.
 // So no random access is possible.
 
+// Time complexity:
+// Insertion - O(1) -- better than arrays O(n)
+// Removal - O(1) from begnning or O(n) from end -- better than arrays O(n) always
+// Searching - O(n) -- Worse than arrays O(1)
+// Access - O(n) -- Worse than arrays O(1)
+
 // A singly linked list only has nodes moving in one direction.
 //  node 1 -> node 2 -> node 3 -> node 4
 // There's also double linked lists which is discussed later
@@ -100,7 +106,7 @@ class SinglyLinkedList {
     // console.log(list.pop());
     // console.log(list);
 
-    // Shifting an item in the list
+    // Shifting an item in the list - removing first node
     // This involves removing the first item in the linked list.
     // First if there's no nodes, return undefined. Then store the current
     // head value in a variable. Set the head property to be the current head's
@@ -118,12 +124,191 @@ class SinglyLinkedList {
         }
         return oldHead;
     }
-}
+    // let list = new SinglyLinkedList();
+    // list.push("HI");
+    // list.push("HI AGAIN");
+    // list.push("HI LAST TIME");
+    // list.push("LAST TIME AGAIN");
+    // console.log(list.shift());
+    // console.log(list);
 
-let list = new SinglyLinkedList();
-list.push("HI");
-list.push("HI AGAIN");
-list.push("HI LAST TIME");
-list.push("LAST TIME AGAIN");
-console.log(list.shift());
-console.log(list);
+    // Unshift from the list - add to beginning of list
+    // This method accepts a value. This value is then used to create a new node
+    // if there is no head property (it's empty) set the head and tail to the new
+    // node value. Otherwise set the new node's next property to the current head
+    // value. Then set the head value of the list to be the newly created node.
+    // increment the list by one and return the whole list.
+
+    unshift(val) {
+        let newNode = new Node(val);
+        if (!this.head) {
+            this.head = newNode;
+            this.tail = this.head;
+        } else {
+            newNode.next = this.head;
+            this.head = newNode;
+        }
+        this.length++;
+        return this;
+    }
+    // let list = new SinglyLinkedList();
+    // list.push("HI");
+    // list.push("HI AGAIN");
+    // list.push("HI LAST TIME");
+    // list.push("LAST TIME AGAIN");
+    // console.log(list.unshift("INSERTED"));
+    // console.log(list);
+
+    // Get method - retrieving an item in the list by position
+    // LinkedLists do not have a built in index like arrays. To et a value from
+    // the list. You need to start at the first node and .next your way until
+    // you've reached your destination. Then return it.
+
+    get(idx) {
+        if (idx < 0 || idx > this.length) return null;
+
+        let current = this.head;
+        let counter = 0;
+
+        while (idx > counter) {
+            current = current.next;
+            counter++;
+        }
+
+        return current;
+    }
+    // let list = new SinglyLinkedList();
+    // list.push("HI");
+    // list.push("HI AGAIN");
+    // list.push("HI LAST TIME");
+    // list.push("LAST TIME AGAIN");
+    // console.log(list.get(2));
+    // console.log(list.get(4));
+
+    // Set method - change the value of a node based on position
+    // This method accepts an index to find and  value to update. The get
+    // method we just created can be used to find the node that needs updating.
+
+    set(idx, val) {
+        if (!this.get(idx)) return false;
+
+        let found = this.get(idx);
+        found.val = val;
+        return true;
+    }
+    // let list = new SinglyLinkedList();
+    // list.push("HI");
+    // list.push("HI AGAIN");
+    // list.push("HI LAST TIME");
+    // list.push("LAST TIME AGAIN");
+    // console.log(list.set(6, "UPDATED!"));
+    // console.log(list.set(2, "UPDATED!"));
+    // console.log(JSON.stringify(list));
+
+    // Insert method - Adds a node at the specified location
+    // Same as set but instead a new node is created and inserted into the list
+    // this method takes in an index and a value. If the value is < 0 or > than the
+    // length, return false. If the index === length then just .push() the value
+    // to the end of the list. If the index is 0, then .unshift() the value into
+    // the list. Otherwise use .get() to access the node at one less of the index
+    // passed the the method. (.get(idx - 1)). Set the .next property of that node
+    // to the new node. Set the .next property on the new node to be the .next value
+    // of the found node. then increment the length and return true.
+
+    insert(idx, val) {
+        if (idx < 0 || idx > this.length) return false;
+        // Adding !! in front of a function call will return true if the function
+        // returns a value
+        if (idx === this.length) return !!this.push(val);
+        if (idx === 0) return !!this.unshift(val);
+
+        let newNode = new Node(val);
+        let insertPoint = this.get(idx - 1);
+        let temp = insertPoint.next;
+        insertPoint.next = newNode;
+        newNode.next = temp;
+        this.length++;
+        return true;
+    }
+    // let list = new SinglyLinkedList();
+    // list.push("HI");
+    // list.push("HI AGAIN");
+    // list.push("HI LAST TIME");
+    // list.push("LAST TIME AGAIN");
+    // console.log(list.insert(1, "UPDATED!"));
+    // console.log(list.insert(0, "FIRST UPDATED!"));
+    // console.log(list.insert(6, "LAST UPDATED!"));
+    // console.log(JSON.stringify(list));
+
+    // Remove method - removes a node at given index.
+    // This method takes an index. If the index is < 0 or >= the length
+    // return undefined. If the index is the same as length - 1 then just
+    // .pop it off. If the index is 0 then shift the value off. Otherwise
+    // use the get method to access index - 1. Set the next property on that
+    // node to be the .next.next. Decrement the length and return the value
+    // of the node removed.
+
+    remove(idx) {
+        if (idx < 0 || idx >= this.length) return undefined;
+        if (idx === this.length - 1) return this.pop();
+        if (idx === 0) return this.shift();
+
+        let before = this.get(idx - 1);
+        let removed = this.get(idx); //or before.next
+        before.next = before.next.next; //or removed.next
+        this.length--;
+
+        return removed.val;
+    }
+    // let list = new SinglyLinkedList();
+    // list.push("HI");
+    // list.push("HI AGAIN");
+    // list.push("HI LAST TIME");
+    // list.push("LAST TIME AGAIN");
+    // console.log(list.remove(2));
+    // console.log(JSON.stringify(list));
+
+    // Reverse method - Reverses the order of the list
+    // First you swap the head and the tail of the list. Then you create
+    // three variables: next, prev, and node (initialze to the head
+    // property). Loop through the list. Set the next varible to the
+    // next property on whatever node is. Then set the next property on
+    // the node variable to be whatever prev is. Then set prev to be the
+    // node variable. Finally set the node variable to be the next
+    // variable.
+
+    reverse() {
+        let node = this.head;
+        this.head = this.tail;
+        this.tail = node;
+
+        let next = null;
+        let prev = null;
+
+        for (let i = 0; i < this.length; i++) {
+            next = node.next;
+            node.next = prev;
+            prev = node;
+            node = next;
+        }
+
+        // -> Or with a while loop
+        // let counter = 0;
+        // while (counter < this.length) {
+        //     next = node.next;
+        //     node.next = prev;
+        //     prev = node;
+        //     node = next;
+        //     counter++;
+        // }
+
+        return this;
+    }
+    // let list = new SinglyLinkedList();
+    // list.push("HI");
+    // list.push("HI AGAIN");
+    // list.push("HI LAST TIME");
+    // list.push("LAST TIME AGAIN");
+    // console.log(JSON.stringify(list));
+    // console.log(JSON.stringify(list.reverse()));
+}
