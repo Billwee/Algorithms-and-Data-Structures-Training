@@ -30,6 +30,18 @@ class DoublyLinkedList {
     // first.next.next.next.next.prev = first.next.next.next;
     // console.log(first);
 
+    // VS Code doesn't do a great job of printing the list so I added this function.
+    print() {
+        let current = this.head;
+        while (current) {
+            console.log("VALUE - ", current.val);
+            console.log("NEXT - ", current.next);
+            console.log("PREV - ", current.prev);
+            console.log("----------------");
+            current = current.next;
+        }
+    }
+
     // Push method - adds nodes to the end
     // Create a new node with the value passed in. If the list is empty then
     // head = tail = newNode. Otherwise set the .next value of the tail to the
@@ -48,11 +60,13 @@ class DoublyLinkedList {
         this.length++;
         return this;
     }
-}
 
+    // Pop method - removes the last node from the list
+    //
+}
 let list = new DoublyLinkedList();
 list.push("FIRST");
 list.push("SECOND");
 list.push("THIRD");
 list.push("FOURTH");
-console.log(list);
+list.print();
