@@ -5,6 +5,13 @@
 
 ////  node 1 <-> node 2 <-> node 3 <-> node 4
 
+// Time complexity:
+//  Insertion - O(1)
+//  Removal - O(1) - Constant, unlike SLLs
+//  Searching - O(n) - Technically, searching is O(n/2) because we remove half the
+//                     search from the start. But that is still O(n) in Big O Notation.
+//  Access - O(n)
+
 class Node {
     constructor(val) {
         this.val = val;
@@ -226,4 +233,100 @@ class DoublyLinkedList {
     // list.print();
 
     // Insert method - Inserts a new node within a list given an index
+    // This method also uses the get() method to find our place. First, check the index is valid
+    // if not, return false. If the index is 0 use upshift() if the index is = .length use
+    // .push() to add it to the end. After that use get() to access the (index - 1). Then set all
+    // links so the nodes properly connect to each other. Increment the list and return true.
+
+    insert(idx, val) {
+        if (idx < 0 || idx > this.length) return false;
+        if (idx === 0) return !!this.unshift(val);
+        if (idx === this.length) return !!this.push(val);
+
+        let newNode = new Node(val);
+        let prevNode = this.get(idx - 1);
+
+        newNode.next = prevNode.next;
+        newNode.prev = prevNode;
+        prevNode.next = newNode;
+        newNode.next.prev = newNode;
+        this.length++;
+        return true;
+    }
+    // let list = new DoublyLinkedList();
+    // list.push("FIRST");
+    // list.push("SECOND");
+    // list.push("THIRD");
+    // list.push("FOURTH");
+    // console.log(list.insert(4, "UPDATE END")); // Should be at the end after running - also it runs .push()
+    // console.log(list.insert(2, "ANOTHER UPDATE")); // only returns "true"
+    // console.log(list.insert(0, "UPDATE FRONT")); // returns .unshift()
+    // list.print(); // Prints the list
+
+    // Remove method - Removes a node at given index
+    // Once again we use get() to get the position of the node to be removed. First we
+    // check if the index is 0 or (.length - 1) in those cases use shift() or pop() to
+    // remove them. Use get() to access the node to be removed and update the links
+    // of the .next and .prev properties to remove the node from the list. Set .next
+    // and .prev on the found node to null. Decrement the length and return the found node.
+
+    remove(idx) {
+        if (idx < 0 || idx >= this.length) return undefined;
+        if (idx === 0) return this.shift();
+        if (idx === this.length - 1) return this.pop();
+
+        let removedNode = this.get(idx);
+
+        removedNode.prev.next = removedNode.next;
+        removedNode.next.prev = removedNode.prev;
+        removedNode.next = null;
+        removedNode.prev = null;
+        this.length--;
+        return removedNode;
+    }
+    // let list = new DoublyLinkedList();
+    // list.push("FIRST");
+    // list.push("SECOND");
+    // list.push("THIRD");
+    // list.push("FOURTH");
+    // list.push("FIFTH");
+    // list.push("SIXTH");
+    // list.push("SEVENTH");
+    // console.log(list.remove(4));
+    // console.log(list.remove(1));
+    // console.log(list.remove(0));
+    // console.log(list.remove(5));
+    // console.log(list.remove(3));
+    // list.print();
+
+    // Reverse method - Reverses the order of the list
+    // This was not included in the lessons but was a question in the exercises. I'm not
+    // sure if my solution is implemented the best way but I know since DLLs have a backwards
+    // pointer, all I needed to do was swap the pointers at every node in the list. Then
+    // afterwards swap the head and tail. I'm sure a for loop is a better option but I went
+    // with a while at first and it worked...
+
+    reverse() {
+        let counter = this.length - 1;
+        let current = this.tail;
+
+        while (counter >= 0) {
+            let temp = current.next;
+            current.next = current.prev;
+            current.prev = temp;
+            current = current.next;
+            counter--;
+        }
+        let temp = this.head;
+        this.head = this.tail;
+        this.tail = temp;
+        return this;
+    }
+    // let list = new DoublyLinkedList();
+    // list.push("FIRST");
+    // list.push("SECOND");
+    // list.push("THIRD");
+    // list.push("FOURTH");
+    // console.log(list.reverse());
+    // list.print();
 }
