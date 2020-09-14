@@ -189,18 +189,41 @@ class DoublyLinkedList {
         }
         return current;
     }
-}
+    // let list = new DoublyLinkedList();
+    // list.push("FIRST");
+    // list.push("SECOND");
+    // list.push("THIRD");
+    // list.push("FOURTH");
+    // list.push("FIFTH");
+    // list.push("SIXTH");
+    // list.push("SEVENTH");
+    // list.push("EIGHTH");
+    // list.push("NINTH");
+    // console.log(list.get(1));
+    // console.log(list.get(6));
 
-let list = new DoublyLinkedList();
-list.push("FIRST");
-list.push("SECOND");
-list.push("THIRD");
-list.push("FOURTH");
-list.push("FIFTH");
-list.push("SIXTH");
-list.push("SEVENTH");
-list.push("EIGHTH");
-list.push("NINTH");
-console.log(list.get(1));
-console.log(list.get(6));
-// list.print();
+    // Set method -  changes a value within a node at a given index
+    // To implement set() you can use the get() to obtain the node at a given index.
+    // Save this node to a variable, update it, and return true. If it doesn't
+    // return a valid response then return false.
+
+    set(idx, val) {
+        if (this.get(idx)) {
+            this.get(idx).val = val;
+            return true;
+        }
+        return false;
+    }
+    // let list = new DoublyLinkedList();
+    // list.push("FIRST");
+    // list.push("SECOND");
+    // list.push("THIRD");
+    // list.push("FOURTH");
+    // console.log(list.set(1, "UPDATE"));
+    // console.log(list.set(3, "ANOTHER UPDATE"));
+    // console.log(list.set(-1, "UPDATE"));
+    // console.log(list.set(10, "UPDATE"));
+    // list.print();
+
+    // Insert method - Inserts a new node within a list given an index
+}
