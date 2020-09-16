@@ -4,8 +4,8 @@
 // stack of plates bein washed in the sink.
 
 //  Ex:  <- 10 <- 7 <- 92 <- 32
-// 10 is the last think added so it will be the first thing removed.
-// 32 was the firs thing added and will be removed last, emptying the list
+// 10 is the last thing added so it will be the first thing removed.
+// 32 was the first thing added and will be removed last, emptying the list
 
 // The LIFO principal is something we've seen before. In recursion, the call stack
 // follows the same guidelines. Hense "stack" in the name.
