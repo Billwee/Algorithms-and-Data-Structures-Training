@@ -33,7 +33,12 @@
 // leaves at the bottom.
 
 // Time complexity of BTSs
-//
+// Insertion - O(log n)
+// Searching - O(log n)
+// As the tree doubles in size (each level of the tree added does this). The amount of steps
+// needed to find/insert a value increases by one.
+// This is not guaranteed though.. for example: If you have a tree that only has increasin values (completed
+// it looks like a single line) would have a s/i time complexity of O(n)
 
 //Implementing a BTS
 
@@ -67,5 +72,79 @@ class BinarySearchTree {
     // property. The same steps apply if the value is less than the node but you traverse
     // the left side of the node.
 
-    insert(val) {}
+    insert(val) {
+        let newNode = new Node(val);
+        if (!this.root) {
+            this.root = newNode;
+            return this;
+        }
+
+        let current = this.root;
+        while (true) {
+            //Checking for duplicate values here
+            if (val === current.value) return undefined;
+            if (val > current.value) {
+                if (!current.right) {
+                    current.right = newNode;
+                    return tree;
+                } else {
+                    current = current.right;
+                }
+            } else {
+                if (!current.left) {
+                    current.left = newNode;
+                    return tree;
+                } else {
+                    current = current.left;
+                }
+            }
+        }
+    }
+
+    // let tree = new BinarySearchTree();
+    // tree.insert(10);
+    // tree.insert(5);
+    // tree.insert(5);
+    // tree.insert(13);
+    // tree.insert(11);
+    // tree.insert(2);
+    // console.log(tree);
+
+    // Find method - searching a tree for a value
+    // This method is similar to insert(), but instead of adding a value we're checking
+    // if the values are equal then returning true or false.
+    // ** With this method you can either return a boolean if the node is found or not
+    // or return the node itself if it's found.
+
+    find(val) {
+        let current = this.root;
+
+        if (!this.root) return false;
+
+        while (true) {
+            if (val === current.value) return true;
+            if (val > current.value) {
+                if (!current.right) return false;
+                current = current.right;
+            } else {
+                if (!current.left) return false;
+                current = current.left;
+            }
+        }
+    }
 }
+
+// let tree = new BinarySearchTree();
+// console.log(tree.find(10));
+// tree.insert(10);
+// tree.insert(5);
+// tree.insert(5);
+// tree.insert(13);
+// tree.insert(11);
+// tree.insert(2);
+// console.log(tree.find(10));
+// console.log(tree.find(4));
+// console.log(tree.find(23));
+// console.log(tree.find(11));
+// console.log(tree.find(2));
+// console.log(tree);
