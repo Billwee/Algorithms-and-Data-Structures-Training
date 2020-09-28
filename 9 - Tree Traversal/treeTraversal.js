@@ -217,3 +217,13 @@ class BinarySearchTree {
     // console.log(tree.depthInOrder());
     // console.log(tree);
 }
+
+// Which is better?...
+// It depends on the situation
+// - For trees that are huge in size, BFS store all values in a queue. So giant trees
+//   take up more memory. DFS only stores the current node in memory in a time.
+// - Trees that are lop sided won't store a lot in memory with BFS compared to DFS.
+// What DFS should I use?...
+// - If you want to work with a set of nodes in order you should use InOrder.
+// - PreOrder is good to use when you need to reconstruct an table given the values
+//   because you know where the root is and all it's node values follow.

@@ -27,20 +27,20 @@
 //                       on the left of a parent is less than it and the child on right
 //                       is greater than it.
 
-// BTS example -  A root of 40 has a node of 20 on it's left and 65 on it's right
+// BST example -  A root of 40 has a node of 20 on it's left and 65 on it's right
 // the 20 node has a node of 11 on it's left and 29 on it's right. the 65 node has a
 // node of 50 on it's left and 91 on it's right... and so on until you have only
 // leaves at the bottom.
 
-// Time complexity of BTSs
+// Time complexity of BSTs
 // Insertion - O(log n)
 // Searching - O(log n)
 // As the tree doubles in size (each level of the tree added does this). The amount of steps
 // needed to find/insert a value increases by one.
 // This is not guaranteed though.. for example: If you have a tree that only has increasin values (completed
-// it looks like a single line) would have a s/i time complexity of O(n)
+// it looks like a single line) would have a s/i time complexity of O(n). IT's essentually a Linked List
 
-//Implementing a BTS
+//Implementing a BST
 
 //First we create a class for the nodes
 class Node {
